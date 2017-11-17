@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch-slim
 
 LABEL maintainer="jacob.alberty@foundigital.com"
 

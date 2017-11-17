@@ -1,22 +1,26 @@
 #!/bin/bash
 set -e
 CPUC=$(awk '/^processor/{n+=1}END{print n}' /proc/cpuinfo)
+BDEPS="bzip2
+ca-certificates
+curl
+file
+g++
+gcc
+libicu-dev
+libncurses5-dev
+libtommath-dev
+make
+procps
+zlib1g-dev"
+
+export CXXFLAGS="-std=gnu++98 -fno-lifetime-dse -fno-delete-null-pointer-checks -fno-strict-aliasing"
 
 apt-get update
 apt-get install -qy --no-install-recommends \
-    libicu52 \
-    libtommath0
-apt-get install -qy --no-install-recommends \
-    bzip2 \
-    ca-certificates \
-    curl \
-    g++ \
-    gcc \
-    libicu-dev \
-    libncurses5-dev \
-    libtommath-dev \
-    make \
-    zlib1g-dev
+    libicu57 \
+    libtommath1
+apt-get install -qy --no-install-recommends ${BDEPS}
 mkdir -p /home/firebird
 cd /home/firebird
 curl -o firebird-source.tar.bz2 -L \
@@ -35,17 +39,7 @@ make silent_install
 cd /
 rm -rf /home/firebird
 find ${PREFIX} -name .debug -prune -exec rm -rf {} \;
-apt-get purge -qy --auto-remove \
-    bzip2 \
-    ca-certificates \
-    curl \
-    g++ \
-    gcc \
-    libicu-dev \
-    libncurses5-dev \
-    libtommath-dev \
-    make \
-    zlib1g-dev
+apt-get purge -qy --auto-remove ${BDEPS}
 rm -rf /var/lib/apt/lists/*
 
 mkdir -p "${PREFIX}/skel/"
