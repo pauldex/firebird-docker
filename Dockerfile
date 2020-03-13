@@ -7,6 +7,7 @@ ENV VOLUME=/firebird
 ENV DEBIAN_FRONTEND noninteractive
 ENV FBURL=https://github.com/FirebirdSQL/firebird/releases/download/R3_0_4/Firebird-3.0.4.33054-0.tar.bz2
 ENV DBPATH=/firebird/data
+ENV ISC_PASSWORD=samadamsbeer
 
 COPY build.sh ./build.sh
 
