@@ -2,19 +2,90 @@
 
 ## Supported tags and respective `Dockerfile` links
 
-[`2.5-sc`, `2.5.9-sc` (*2.5-sc/Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/2.5-sc/Dockerfile)
+[`2.5-sc`, `v2.5.9-sc` (*2.5-sc/Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/2.5-sc/Dockerfile)
 
-[`2.5-ss`, `2.5.9-ss` (*2.5-ss/Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/2.5-ss/Dockerfile)
+[`2.5-ss`, `v2.5.9-ss` (*2.5-ss/Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/2.5-ss/Dockerfile)
 
-[`3.0`, `3.0.4`, `latest` (*Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/master/Dockerfile)
+[`3.0`, `v3.0`, `v3.0.10` (*Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/3.0/Dockerfile)
 
-[`4.0`, `beta` (*Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/beta/Dockerfile)
+[`v4.0`, `v4.0.1`, `latest` (*Dockerfile*)](https://github.com/jacobalberty/firebird-docker/blob/master/Dockerfile)
 
 ## What's New
-### 3.0.4 Sub Release
-Firebird Project is happy to announce general availability of Firebird [3.0.4](https://www.firebirdsql.org/en/firebird-3-0-4/) — the 4th point release in the Firebird 3.0 series.
 
-This sub-release offers many bug fixes and also adds a few improvements, please refer to the [Release Notes](https://www.firebirdsql.org/file/documentation/release_notes/html/en/3_0/rlsnotes30.html) for the full list of changes. Binary kits for Windows, Linux and Android platforms are immediately available for [download](https://www.firebirdsql.org/en/firebird-3-0-4/), Mac OS kits will follow shortly.
+### Firebird 4.0.2 sub-release is available
+
+Firebird Project is happy to announce general availability of [Firebird 4.0.2](https://firebirdsql.org/en/firebird-4-0-2/) — the second point release in the Firebird 4.0 series.
+
+This sub-release offers many bug fixes and also adds a few improvements, please refer to the [Release Notes](https://firebirdsql.org/file/documentation/release_notes/html/en/4_0/rlsnotes40.html) for the full list of changes.
+Binary kits for Windows, Linux and Android platforms are immediately available for [download](https://firebirdsql.org/en/firebird-4-0-2/).
+
+### Firebird 3.0.10 sub-release is available
+
+Firebird Project is happy to announce general availability of [Firebird 3.0.10](https://firebirdsql.org/en/firebird-3-0-10/) — the latest point release in the Firebird 3.0 series.
+
+This sub-release offers many bug fixes and also adds a few improvements, please refer to the [Release Notes](https://firebirdsql.org/file/documentation/release_notes/html/en/3_0/rlsnotes30.html) for the full list of changes.
+Binary kits for Windows, Linux and Android platforms are immediately available for [download](https://firebirdsql.org/en/firebird-3-0-10/), packages for Mac OS will follow shortly.
+
+
+### Automatic restore of backups in `/firebird/restore`
+
+This image will now check for any backups in `/firebird/restore` ending in the file extension `.fbk` and attempt to restore them to the same filename but with the extension `.fdb` in `/firebird/data`. It will only attempt to restore backups if the equivalent `.fdb` does not already exist in `/firebird/data`. For more details on this feature please see the [`/firebird/restore` volume description](#firebirdrestore)
+
+### Firebird 3.0.9 sub-release is available
+
+Firebird Project is happy to announce general availability of [Firebird 3.0.9](https://firebirdsql.org/en/firebird-3-0-9/) — the latest point release in the Firebird 3.0 series.
+
+This sub-release offers a few important bugfixes, please refer to the [Release Notes](https://firebirdsql.org/file/documentation/release_notes/html/en/3_0/rlsnotes30.html) for the full list of changes.
+Binary kits for Windows, Linux and Android platforms are immediately available for [download](https://firebirdsql.org/en/firebird-3-0-9/), packages for Mac OS will follow shortly.
+
+### Firebird Project is happy to announce general availability of [Firebird 4.0.1](https://firebirdsql.org/en/firebird-4-0-1/) — the first point release in the Firebird 4.0 series.
+
+This sub-release offers many bug fixes and also adds a few improvements, please refer to the [Release Notes](https://firebirdsql.org/file/documentation/release_notes/html/en/4_0/rlsnotes40.html) for the full list of changes.
+Binary kits for Windows, Linux and Android platforms are immediately available for [download](https://firebirdsql.org/en/firebird-4-0-1/).
+
+### Firebird 3.0.8 sub-release is available
+
+Firebird Project is happy to announce general availability of [Firebird 3.0.8](https://firebirdsql.org/en/firebird-3-0-8/) — the latest point release in the Firebird 3.0 series.
+
+This sub-release offers many bug fixes and also adds a few improvements, please refer to the [Release Notes](https://firebirdsql.org/file/documentation/release_notes/html/en/3_0/rlsnotes30.html) for the full list of changes.
+Binary kits for Windows, Linux, Mac OS and Android platforms are immediately available for [download](https://firebirdsql.org/en/firebird-3-0-8/).
+
+### Base image is now on bullseye for 2.5-ss, 2.5-sc, 3.0 and 4.0 branches
+
+This required a script to replace the libicu supplied by bullseye with the preferred one for the relevant firebird versions.
+If for some reason you do get a [Collation unicode for character set utf8 is not installed](http://www.firebirdfaq.org/faq358/) error you can use
+`gfix -icu <database>` to correct the issue as of firebird 3.0.
+
+Both 2.5 branches are now included as well. Unfortunately the `gfix -icu <database>` option is not available for 2.5
+so instead I have opted to add tags for `v2.5.9-sc-jessie` and `v2.5.9-ss-jessie`. If you find your setup works with the jessie tags but not the newer
+`v2.5.9-sc` or `v2.5.9-ss` tags please switch back to the jessie tags and open an issue to let me know. This will probably be the last major update for v2.5 as 
+version 2.5 has been [discontinued for 2 years now](https://firebirdsql.org/en/discontinued-versions/).
+
+### Firebird Project is happy to announce general availability of [Firebird 4.0](https://firebirdsql.org/en/firebird-4-0/) — the latest major release of the Firebird relational database.
+
+Firebird 4.0 introduces new data types and many improvements without radical changes in architecture or operation, the most important are:
+
+-   Built-in logical replication;
+-   Extended length of metadata identifiers (up to 63 characters);
+-   New INT128 and DECFLOAT data types, longer precision for NUMERIC/DECIMAL data types;
+-   Support for international time zones;
+-   Configurable time-outs for connections and statements;
+-   Pooling of external connections;
+-   Batch operations in the API;
+-   Built-in cryptographic functions;
+-   New ODS (version 13) with new system and monitoring tables;
+-   Maximum page size increased to 32KB.
+
+Please refer to the [Release Notes](https://firebirdsql.org/file/documentation/release_notes/html/en/4_0/rlsnotes40.html) for the full list of changes. The complete [Language Reference](https://firebirdsql.org/file/documentation/html/en/refdocs/fblangref40/firebird-40-language-reference.html) is also available.
+
+Binary kits for Windows, Linux and Android platforms (both 32-bit and 64-bit) are immediately available for [download](https://firebirdsql.org/en/firebird-4-0/).
+
+### 3.0.7 Sub Release
+Firebird Project is happy to announce general availability of Firebird [3.0.7](https://firebirdsql.org/en/firebird-3-0-7/) — the latest point release in the Firebird 3.0 series.
+
+This sub-release offers many bug fixes and also adds a few improvements, please refer to the [Release Notes](https://firebirdsql.org/file/documentation/release_notes/html/en/3_0/rlsnotes30.html) for the full list of changes. Binary kits for Windows, Linux, Mac OS and Android platforms are immediately available for [download](https://firebirdsql.org/en/firebird-3-0-7/).
+
+All users of Firebird v3.0.6 are strongly encouraged to upgrade to v3.0.7 as soon as possible due to several serious bugs found in v3.0.6 and fixed in this point release. 
 
 
 ### 2.5.9 Sub Release
@@ -85,6 +156,24 @@ WireCrypt = enabled
 ```
 This will allow legacy clients to connect and authenticate.
 
+### `DataTypeCompatibility`
+
+If this is set then when launching without an existing /firebird/etc folder this will cause the newly created firebird.conf to set `DataTypeCompatibility` with the defined value supported by Firebird.
+```
+# ----------------------------
+# Engine currently provides a number of new datatypes unknown to legacy clients.
+# In order to simplify use of old applications set this parameter to minor FB
+# version datatype compatibility with which you need. Currently two values are
+# supported: 3.0 & 2.5.
+# More precise (including per-session) tuning is possible via SQL and DPB.
+#
+# Per-database configurable.
+#
+#    Type: string
+#
+#DataTypeCompatibility =
+```
+
 ### `EnableWireCrypt`
 
 If this is set to true then when launching without an existing /firebird/etc folder this will cause the newly created firebird.conf to have
@@ -113,6 +202,13 @@ This single volume supercedes all of the old volumes with most of the old volume
 #### `/firebird/data`
 Default location to put database files
 
+#### `/firebird/restore`
+Any `.fbk` files located in here that do not have a matching `.fdb` file under `/firebird/data` will automatically be restored via `gbak` to `/firebird/data` on container start.
+The function that handles restoration starts by looking for `/firebird/etc/SYSDBA.password` if the file doesn't exist then no restoration attempts will be made.
+If that file exists then it will check for a `.env` file matching the `.fbk` file in `/firebird/restore` and attempt to load `RESTORE_USER` and `RESTORE_PASSWORD` from that file but will fall back to `ISC_USER` and `ISC_PASSWORD` from `/firebird/etc/SYSDBA.password` if those values do not exist in the `.env` file or the `.env` file is missing.
+
+So for example if you have `/firebird/restore/database.fbk` the script will first check if `/firebird/etc/SYSDBA.password` exists and fail if it doesn't. It will then check if `/firebird/data/database.fdb` exists. If that file does not exist the script will then attempt to restore `/firebird/restore/database.fbk` to `/firebird/data/database.fdb` using either `RESTORE_USER` and `RESTORE_PASSWORD` from `/firebird/restore/database.env` or if that file does not exist it will use `ISC_USER` and `ISC_PASSWORD` from  `/firebird/etc/SYSDBA.password`.
+
 #### `/firebird/system`
 security database DIR
 
@@ -138,7 +234,7 @@ Database lock directory
 ## Exposes: 
 ### 3050/tcp
 
-## Health Check
+## Health Check0
 I have now added [HEALTHCHECK support](https://docs.docker.com/engine/reference/builder/#healthcheck) to the image. By default it uses nc to check port 3050.
 If you would like it to perform a more thorough check then you can create `/firebird/etc/docker-healthcheck.conf`
 If you add `HC_USER` `HC_PASS` and `HC_DB` to that file then the healthcheck will attempt a simple query against the specified database to determine server status.
