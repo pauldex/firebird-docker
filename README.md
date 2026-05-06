@@ -1,3 +1,7 @@
+# Archived
+
+This repo has been archived please get updates to your images from https://hub.docker.com/r/firebirdsql/firebird
+
 # docker Firebird
 
 ## Supported tags and respective `Dockerfile` links
